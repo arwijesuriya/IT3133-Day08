@@ -4,12 +4,11 @@ import React from "react";
 
 export default function login() {
     const navigate = useNavigate();
-    const users = ({
-        username:'admin',
-        password:'123'
-    });
+
+    let username="Admin";
+    let password="123"
+    
     const [ error, seterror ] = useState("");
-    const [ user, setuser ] = useState("");
     
     const authenticate = (e) => {
         e.preventDefault();
@@ -24,7 +23,8 @@ export default function login() {
             return;
         }
 
-        if (users.username === e.username || users.password === e.password) {
+        if (username === e.username || password === e.password) {
+            const navigate = useNavigate();
             navigate("/dashboard");
         }
     }
@@ -33,9 +33,12 @@ export default function login() {
         <div>
             <h1>Login Here</h1>
             <form onSubmit={authenticate}>
-                <input type="text" name="username" placeholder="Enter username" value={users.username} />
-                <input type="password" name="password" placeholder="Enter password" value={users.password} />
+                <input type="text" name="username" placeholder="Enter username" value={username} />
+                <input type="password" name="password" placeholder="Enter password" value={password} />
+                
                 <button onClick={authenticate}>Click Me</button>
+
+                <span>{error}</span>
             </form>
         </div>
     );
