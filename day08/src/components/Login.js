@@ -1,31 +1,31 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 
-export default function login() {
+export default function Login() {
     const navigate = useNavigate();
 
-    let username="Admin";
-    let password="123"
-    
-    const [ error, seterror ] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     
     const authenticate = (e) => {
         e.preventDefault();
-
+        
         if (!username || !password) {
-            seterror("Please provide all the fields");
+            setError("Please provide all the fields");
             return;
         }
 
-        if (e.password.length < 8) {
-            seterror("Password must contain 8 charcters");
+        if (password.length < 8) {
+            setError("Password must contain at least 8 characters");
             return;
         }
 
-        if (username === e.username || password === e.password) {
-            const navigate = useNavigate();
+        if (username === "Admin" && password === "12345678") {
             navigate("/dashboard");
+        }
+        else {
+            setError("Invalid credentials");
         }
     }
 
@@ -33,12 +33,25 @@ export default function login() {
         <div>
             <h1>Login Here</h1>
             <form onSubmit={authenticate}>
-                <input type="text" name="username" placeholder="Enter username" value={username} />
-                <input type="password" name="password" placeholder="Enter password" value={password} />
-                
-                <button onClick={authenticate}>Click Me</button>
-
-                <span>{error}</span>
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Enter username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)} // Updates state
+                />
+                <br />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)} 
+                />
+                <br />
+                <button type="submit">Login</button>
+                <br />
+                <span style={{ color: "red" }}>{error}</span> 
             </form>
         </div>
     );

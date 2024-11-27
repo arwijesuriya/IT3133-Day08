@@ -9,12 +9,12 @@ function App() {
     <div className="App">
       <Router>
         <nav>
-          <ul>
-            <li><Link to='/'>Login</Link></li>
-            <li><Link to='/dashboard'>Dashboard</Link></li>
+          <ul type="none">
+            <li><Link to="/">Login</Link></li>
+            <li><Link to="/dashboard">Dashboard</Link></li>
           </ul>
         </nav>
-        
+
         <Routes>
           <Route path='/' element={ <Login/> }/>
           <Route path='/dashboard' element={ <Dashboard/> }/>
